@@ -27,9 +27,10 @@ async function runParse(file){
         function(results) {
             while(element < rows){
                 var MGSID = (results.data[element][0])
+                //run Twilio deletion
                 deleteStarter(MGSID);
                 element++;
-                //delay function
+                //delay function needed due to recommendation of only 10 calls per second
                 setTimeout(() => {
                 }, "100")
             }
