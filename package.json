@@ -1,0 +1,16 @@
+{
+  "name": "delete-campaigns",
+  "version": "1.0.0",
+  "description": "",
+  "main": "runDelete.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "papaparse": "^5.3.2",
+    "twilio": "^4.0.0"
+  }
+}
