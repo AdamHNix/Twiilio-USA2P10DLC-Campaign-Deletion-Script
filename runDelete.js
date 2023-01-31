@@ -11,6 +11,8 @@ const csvFile = fs.createReadStream("startersTest.csv");
 //List number of rows to be parsed
 const rows = 3
 let element = 0;
+//seconds between each call
+const timeOutSeconds = 1;
 
 //call needed to delete campaign on a given MG SID
 function deleteStarter(SID){
@@ -21,21 +23,25 @@ function deleteStarter(SID){
             console.log (`error in delete for ${SID}: `, e)
         })}
 
+async function sleep(seconds){
+    return new Promise(resolve => { setTimeout(resolve, seconds * 1000)})
+} 
+
+
 async function runParse(file){
     csv.parse(file, {
     delimiter: ',',
     preview: rows,
     header: false,
     complete: 
-        function(results) {
+        async function(results) {
             while(element < rows){
-                console.log("element ", element)
+                await sleep(timeOutSeconds)
                 var MGSID = (results.data[element][0])
                 //run Twilio deletion
                 try{deleteStarter(MGSID)}catch(e){
                     console.log("Error: ", e)
                 }
-                console.log(`${MGSID} deleted`)
                 element++;
                 //delay function needed due to recommendation of only 10 calls per second
             }
